@@ -1,11 +1,13 @@
 package com.example.happy_birthday_app
 
-import android.R.attr.text
+import android.R.attr.lineHeight
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -15,6 +17,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,10 +37,9 @@ class MainActivity : ComponentActivity() {
           modifier = Modifier.fillMaxSize(),
           color = MaterialTheme.colorScheme.background
         ) {
-          GreetingText(
-            message = "Happy Birthday Sam!",
-            from = "From Emma"
-            // modifier = Modifier.padding(24.dp)
+          GreetingImage(
+            message = stringResource(R.string.message),
+            from = stringResource(R.string.from)
           )
         }
       }
@@ -49,36 +53,51 @@ fun GreetingText(
   from: String,
   modifier: Modifier = Modifier
 ) {
-//  Row {
-//    Text(
-//      text = from,
-//      fontSize = 36.sp
-//    )
-//    Text(
-//      text = message,
-//      fontSize = 100.sp,
-//      lineHeight = 116.sp,
-//      modifier = modifier
-//    )
-//  }
-
+  // Create a column so that texts don't overlap
   Column(
     verticalArrangement = Arrangement.Center,
-    modifier = modifier.padding(8.dp)
-    // modifier = modifier
+    modifier = modifier
   ) {
-    Text(
-      text = from,
-      fontSize = 36.sp,
-      modifier = Modifier
-        .padding(16.dp)
-        .align(alignment = Alignment.Start)
-    )
     Text(
       text = message,
       fontSize = 100.sp,
       lineHeight = 116.sp,
-      textAlign = TextAlign.Center
+      textAlign = TextAlign.Center,
+      modifier = Modifier.padding(top = 16.dp)
+    )
+    Text(
+      text = from,
+      fontSize = 36.sp,
+      modifier = Modifier
+        .padding(top = 16.dp)
+        .padding(end = 16.dp)
+        .align(alignment = Alignment.End)
+
+    )
+  }
+}
+
+@Composable
+fun GreetingImage(
+  message: String,
+  from: String,
+  modifier: Modifier = Modifier
+) {
+  // Create a box to overlap image and texts
+  Box(modifier) {
+    Image(
+      painter = painterResource(id = R.drawable.avt_github),
+      contentDescription = null,
+      contentScale = ContentScale.Crop,
+      alpha = 0.5F,
+      modifier = Modifier.fillMaxSize()
+    )
+    GreetingText(
+      message = message,
+      from = from,
+      modifier = Modifier
+        .fillMaxSize()
+        .padding(8.dp)
     )
   }
 }
@@ -87,9 +106,9 @@ fun GreetingText(
 @Composable
 fun BirthdayCardPreview() {
   Happy_birthday_appTheme {
-    GreetingText(
-      message = "Happy Birthday Sam!",
-      from = "From Emma"
+    GreetingImage(
+      message = stringResource(R.string.message),
+      from = stringResource(R.string.from)
     )
   }
 }
