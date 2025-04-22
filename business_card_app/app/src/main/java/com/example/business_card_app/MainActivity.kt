@@ -83,6 +83,7 @@ class MainActivity : ComponentActivity() {
     Column(
       modifier = Modifier
         .fillMaxWidth()
+        .fillMaxHeight()
         .padding(bottom = 100.dp),
       verticalArrangement = Arrangement.Bottom,
       horizontalAlignment = Alignment.CenterHorizontally,
@@ -107,9 +108,7 @@ class MainActivity : ComponentActivity() {
     icon: ImageVector,
     details: String
   ) {
-    Row(
-      modifier = Modifier.padding(start = 100.dp, end = 100.dp, bottom = 16.dp)
-    ) {
+    Row(modifier = Modifier.padding(start = 100.dp, end = 100.dp, bottom = 16.dp)) {
       Icon(
         imageVector = icon,
         contentDescription = null,
