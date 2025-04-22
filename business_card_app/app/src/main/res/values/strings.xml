@@ -1,3 +1,8 @@
 <resources>
   <string name="app_name">business_card_app</string>
+  <string name="full_name">Minh Khang</string>
+  <string name="title">Android Developer </string>
+  <string name="phone_number">+84 (23) 456 789</string>
+  <string name="share">@decoutkhanqindev</string>
+  <string name="email">abc@gmail.com</string>
 </resources>
