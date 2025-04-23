@@ -57,7 +57,6 @@ class MainActivity : ComponentActivity() {
 }
 
 @SuppressLint("UnrememberedMutableState")
-@Preview
 @Composable
 fun TipCalculatorApp() {
   var amountInput by remember { mutableStateOf("") }
@@ -70,70 +69,68 @@ fun TipCalculatorApp() {
 
   val tip = calculateTip(amount, tipPercent, roundUp)
 
-  Tip_calculator_appTheme {
-    Scaffold(modifier = Modifier.fillMaxSize()) { it: PaddingValues ->
-      Surface(
+  Scaffold(modifier = Modifier.fillMaxSize()) { it: PaddingValues ->
+    Surface(
+      modifier = Modifier
+        .fillMaxSize()
+        .padding(it)
+    ) {
+      Column(
         modifier = Modifier
-          .fillMaxSize()
-          .padding(it)
+          .statusBarsPadding()
+          .padding(horizontal = 40.dp)
+          .verticalScroll(rememberScrollState()) // scrolling in landscape mode
+          .safeDrawingPadding(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
       ) {
-        Column(
+        Text(
+          text = stringResource(R.string.calculate_tip),
           modifier = Modifier
-            .statusBarsPadding()
-            .padding(horizontal = 40.dp)
-            .verticalScroll(rememberScrollState()) // scrolling in landscape mode
-            .safeDrawingPadding(),
-          horizontalAlignment = Alignment.CenterHorizontally,
-          verticalArrangement = Arrangement.Center
-        ) {
-          Text(
-            text = stringResource(R.string.calculate_tip),
-            modifier = Modifier
-              .padding(bottom = 16.dp, top = 40.dp)
-              .align(alignment = Alignment.Start)
-          )
+            .padding(bottom = 16.dp, top = 40.dp)
+            .align(alignment = Alignment.Start)
+        )
 
-          EditNumberField(
-            label = R.string.bill_amount,
-            leadingIcon = R.drawable.money,
-            keyboardOptions = KeyboardOptions.Default.copy(
-              keyboardType = KeyboardType.Number,
-              imeAction = ImeAction.Next
-            ),
-            value = amountInput,
-            onValueChanged = { amountInput = it },
-            modifier = Modifier
-              .padding(bottom = 32.dp)
-              .fillMaxWidth(),
-          )
+        EditNumberField(
+          label = R.string.bill_amount,
+          leadingIcon = R.drawable.money,
+          keyboardOptions = KeyboardOptions.Default.copy(
+            keyboardType = KeyboardType.Number,
+            imeAction = ImeAction.Next
+          ),
+          value = amountInput,
+          onValueChanged = { amountInput = it },
+          modifier = Modifier
+            .padding(bottom = 32.dp)
+            .fillMaxWidth(),
+        )
 
-          EditNumberField(
-            label = R.string.how_was_the_service,
-            leadingIcon = R.drawable.percent,
-            keyboardOptions = KeyboardOptions.Default.copy(
-              keyboardType = KeyboardType.Number,
-              imeAction = ImeAction.Done
-            ),
-            value = tipPercentInput,
-            onValueChanged = { tipPercentInput = it },
-            modifier = Modifier
-              .padding(bottom = 32.dp)
-              .fillMaxWidth(),
-          )
+        EditNumberField(
+          label = R.string.how_was_the_service,
+          leadingIcon = R.drawable.percent,
+          keyboardOptions = KeyboardOptions.Default.copy(
+            keyboardType = KeyboardType.Number,
+            imeAction = ImeAction.Done
+          ),
+          value = tipPercentInput,
+          onValueChanged = { tipPercentInput = it },
+          modifier = Modifier
+            .padding(bottom = 32.dp)
+            .fillMaxWidth(),
+        )
 
-          RoundTheTipRow(
-            roundUp = roundUp,
-            onRoundUpChanged = { roundUp = it },
-            modifier = Modifier.padding(bottom = 32.dp)
-          )
+        RoundTheTipRow(
+          roundUp = roundUp,
+          onRoundUpChanged = { roundUp = it },
+          modifier = Modifier.padding(bottom = 32.dp)
+        )
 
-          Text(
-            text = stringResource(R.string.tip_amount, tip),
-            style = MaterialTheme.typography.displaySmall
-          )
+        Text(
+          text = stringResource(R.string.tip_amount, tip),
+          style = MaterialTheme.typography.displaySmall
+        )
 
-          Spacer(modifier = Modifier.height(150.dp))
-        }
+        Spacer(modifier = Modifier.height(150.dp))
       }
     }
   }
@@ -184,4 +181,12 @@ private fun calculateTip(amount: Double, tipPercent: Double = 15.0, roundUp: Boo
   var tip = tipPercent / 100 * amount
   if (roundUp) tip = ceil(tip)
   return NumberFormat.getCurrencyInstance().format(tip)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AppPreview() {
+  Tip_calculator_appTheme {
+    TipCalculatorApp()
+  }
 }
