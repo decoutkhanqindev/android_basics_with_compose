@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,79 +49,79 @@ class MainActivity : ComponentActivity() {
       }
     }
   }
+}
 
-  @Composable
-  fun BusinessCardUi() {
-    Column(
-      modifier = Modifier
-        .fillMaxWidth()
-        .fillMaxHeight(),
-      verticalArrangement = Arrangement.Center,
-      horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-      Image(
-        painter = painterResource(R.drawable.avt_github),
-        contentDescription = null,
-        modifier = Modifier
-          .height(150.dp)
-          .width(150.dp)
-          .padding(bottom = 16.dp),
-      )
-      Text(
-        text = getString(R.string.full_name),
-        fontSize = 32.sp,
-        fontWeight = FontWeight.Light,
-        modifier = Modifier.padding(bottom = 8.dp)
-      )
-      Text(
-        text = getString(R.string.title),
-        fontWeight = FontWeight.Bold,
-        color = MaterialTheme.colorScheme.primary,
-      )
-    }
-
-    Column(
-      modifier = Modifier
-        .fillMaxWidth()
-        .fillMaxHeight()
-        .padding(bottom = 100.dp),
-      verticalArrangement = Arrangement.Bottom,
-      horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-      ContractItemUi(
-        icon = Icons.Rounded.Phone, details = getString(R.string.phone_number)
-      )
-      ContractItemUi(
-        icon = Icons.Rounded.Share, details = getString(R.string.share)
-      )
-      ContractItemUi(
-        icon = Icons.Rounded.Email, details = getString(R.string.email)
-      )
-    }
-  }
-
-  @Composable
-  private fun ContractItemUi(
-    icon: ImageVector, details: String
+@Composable
+fun BusinessCardUi() {
+  Column(
+    modifier = Modifier
+      .fillMaxWidth()
+      .fillMaxHeight(),
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally,
   ) {
-    Row(modifier = Modifier.padding(start = 100.dp, end = 100.dp, bottom = 16.dp)) {
-      Icon(
-        imageVector = icon,
-        contentDescription = null,
-        tint = MaterialTheme.colorScheme.primary,
-        modifier = Modifier.weight(1f)
-      )
-      Text(
-        text = details, fontWeight = FontWeight.Bold, modifier = Modifier.weight(4f)
-      )
-    }
+    Image(
+      painter = painterResource(R.drawable.avt_github),
+      contentDescription = null,
+      modifier = Modifier
+        .height(150.dp)
+        .width(150.dp)
+        .padding(bottom = 16.dp),
+    )
+    Text(
+      text = stringResource(R.string.full_name),
+      fontSize = 32.sp,
+      fontWeight = FontWeight.Light,
+      modifier = Modifier.padding(bottom = 8.dp)
+    )
+    Text(
+      text = stringResource(R.string.title),
+      fontWeight = FontWeight.Bold,
+      color = MaterialTheme.colorScheme.primary,
+    )
   }
 
-  @Preview(showBackground = true)
-  @Composable
-  fun AppPreview() {
-    Business_card_appTheme {
-      BusinessCardUi()
-    }
+  Column(
+    modifier = Modifier
+      .fillMaxWidth()
+      .fillMaxHeight()
+      .padding(bottom = 100.dp),
+    verticalArrangement = Arrangement.Bottom,
+    horizontalAlignment = Alignment.CenterHorizontally,
+  ) {
+    ContractItemUi(
+      icon = Icons.Rounded.Phone, details = stringResource(R.string.phone_number)
+    )
+    ContractItemUi(
+      icon = Icons.Rounded.Share, details = stringResource(R.string.share)
+    )
+    ContractItemUi(
+      icon = Icons.Rounded.Email, details = stringResource(R.string.email)
+    )
+  }
+}
+
+@Composable
+private fun ContractItemUi(
+  icon: ImageVector, details: String
+) {
+  Row(modifier = Modifier.padding(start = 100.dp, end = 100.dp, bottom = 16.dp)) {
+    Icon(
+      imageVector = icon,
+      contentDescription = null,
+      tint = MaterialTheme.colorScheme.primary,
+      modifier = Modifier.weight(1f)
+    )
+    Text(
+      text = details, fontWeight = FontWeight.Bold, modifier = Modifier.weight(5f)
+    )
+  }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AppPreview() {
+  Business_card_appTheme {
+    BusinessCardUi()
   }
 }

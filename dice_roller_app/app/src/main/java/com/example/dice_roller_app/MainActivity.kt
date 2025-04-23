@@ -38,16 +38,6 @@ class MainActivity : ComponentActivity() {
   }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DiceRollerApp() {
-  DiceWithButtonAndImage(
-    modifier = Modifier
-      .fillMaxSize()
-      .wrapContentSize(align = Alignment.Center)
-  )
-}
-
 @Composable
 fun DiceWithButtonAndImage(modifier: Modifier = Modifier) {
   // remember will store an object in memory to avoid recomposition
@@ -78,4 +68,16 @@ fun DiceWithButtonAndImage(modifier: Modifier = Modifier) {
 
 private fun getRandomResult(start: Int, end: Int): Int {
   return (start..end).random()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DiceRollerApp() {
+  Dice_roller_appTheme {
+    DiceWithButtonAndImage(
+      modifier = Modifier
+        .fillMaxSize()
+        .wrapContentSize(align = Alignment.Center)
+    )
+  }
 }

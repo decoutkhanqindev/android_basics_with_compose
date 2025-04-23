@@ -52,7 +52,6 @@ class MainActivity : ComponentActivity() {
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
 fun LemonJuiceApp() {
   // remember use to save the state of the variable
@@ -158,3 +157,10 @@ private fun MakingLemonJuiceItemUi(
   }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun AppPreview() {
+  Lemon_juice_appTheme {
+    LemonJuiceApp()
+  }
+}
