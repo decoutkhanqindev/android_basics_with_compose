@@ -1,3 +1,14 @@
 <resources>
   <string name="app_name">art_space_app</string>
+  <string name="denji_title">Denji</string>
+  <string name="denji_year">Chainsaw Man - 2023</string>
+  <string name="denji_author">by Tatsuki Fujimoto</string>
+  <string name="sanji_title">Sanji</string>
+  <string name="sanji_year">One Piece - 2022</string>
+  <string name="sanji_author">by Eiichiro Oda</string>
+  <string name="naruto_title">Naruto</string>
+  <string name="naruto_year">Naruto - 2020</string>
+  <string name="naruto_author">by Masashi Kishimoto</string>
+  <string name="prev_button">Previous</string>
+  <string name="next_button">Next</string>
 </resources>
