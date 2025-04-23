@@ -41,8 +41,7 @@ class MainActivity : ComponentActivity() {
       Business_card_appTheme {
         // A surface container using the 'background' color from the theme
         Surface(
-          modifier = Modifier.fillMaxSize(),
-          color = MaterialTheme.colorScheme.background
+          modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
         ) {
           BusinessCardUi()
         }
@@ -89,24 +88,20 @@ class MainActivity : ComponentActivity() {
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
       ContractItemUi(
-        icon = Icons.Rounded.Phone,
-        details = getString(R.string.phone_number)
+        icon = Icons.Rounded.Phone, details = getString(R.string.phone_number)
       )
       ContractItemUi(
-        icon = Icons.Rounded.Share,
-        details = getString(R.string.share)
+        icon = Icons.Rounded.Share, details = getString(R.string.share)
       )
       ContractItemUi(
-        icon = Icons.Rounded.Email,
-        details = getString(R.string.email)
+        icon = Icons.Rounded.Email, details = getString(R.string.email)
       )
     }
   }
 
   @Composable
   private fun ContractItemUi(
-    icon: ImageVector,
-    details: String
+    icon: ImageVector, details: String
   ) {
     Row(modifier = Modifier.padding(start = 100.dp, end = 100.dp, bottom = 16.dp)) {
       Icon(
@@ -116,9 +111,7 @@ class MainActivity : ComponentActivity() {
         modifier = Modifier.weight(1f)
       )
       Text(
-        text = details,
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier.weight(4f)
+        text = details, fontWeight = FontWeight.Bold, modifier = Modifier.weight(4f)
       )
     }
   }
