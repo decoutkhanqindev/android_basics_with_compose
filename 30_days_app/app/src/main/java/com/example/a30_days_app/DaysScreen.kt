@@ -27,6 +27,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -81,7 +82,13 @@ fun DayItem(
     else MaterialTheme.colorScheme.primary,
   )
 
-  Card(modifier = modifier) {
+  Card(
+    modifier = modifier,
+    colors = CardDefaults.cardColors(
+      containerColor = MaterialTheme.colorScheme.surfaceVariant
+    ),
+    elevation = CardDefaults.cardElevation(defaultElevation = 20.dp)
+  ) {
     Column(
       modifier = Modifier
         .background(color = color)
