@@ -33,10 +33,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -48,8 +46,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
-import com.example.dessert_clicker_app.data.DessertRepository
-import com.example.dessert_clicker_app.model.Dessert
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.dessert_clicker_app.ui.DessertViewModel
 import com.example.dessert_clicker_app.ui.theme.DessertClickerAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -61,7 +59,7 @@ class MainActivity : ComponentActivity() {
     enableEdgeToEdge()
     setContent {
       DessertClickerAppTheme {
-        DessertClickerApp(desserts = DessertRepository.desserts)
+        DessertClickerApp()
       }
     }
   }
@@ -92,21 +90,6 @@ class MainActivity : ComponentActivity() {
   }
 }
 
-private fun determineDessertToShow(
-  desserts: List<Dessert>,
-  dessertsSold: Int
-): Dessert {
-  var dessertToShow: Dessert = desserts.first()
-  for (dessert: Dessert in desserts) {
-    if (dessertsSold >= dessert.startProductionAmount) {
-      dessertToShow = dessert
-    } else {
-      break
-    }
-  }
-  return dessertToShow
-}
-
 private fun shareSoldDessertsInformation(
   intentContext: Context,
   dessertsSold: Int,
@@ -135,25 +118,19 @@ private fun shareSoldDessertsInformation(
 }
 
 @Composable
-fun DessertClickerApp(
-  desserts: List<Dessert>,
-  modifier: Modifier = Modifier
-) {
-  var revenue by rememberSaveable { mutableStateOf(0) }
-  var dessertsSold by rememberSaveable { mutableStateOf(0) }
-  var currentDessertPrice by rememberSaveable { mutableStateOf(desserts[0].price) }
-  var currentDessertImageId by rememberSaveable { mutableStateOf(desserts[0].imageId) }
+fun DessertClickerApp(dessertViewModel: DessertViewModel = viewModel()) {
+  val dessertUiState by dessertViewModel.uiState.collectAsState()
 
   Scaffold(
-    modifier = modifier,
+    modifier = Modifier.fillMaxSize(),
     topBar = {
       val intentContext = LocalContext.current
       TopAppBar(
         onShareBtnClick = {
           shareSoldDessertsInformation(
             intentContext = intentContext,
-            dessertsSold = dessertsSold,
-            revenue = revenue,
+            dessertsSold = dessertUiState.dessertsSold,
+            revenue = dessertUiState.revenue,
           )
         },
         modifier = Modifier
@@ -170,16 +147,10 @@ fun DessertClickerApp(
       color = MaterialTheme.colorScheme.background
     ) {
       DessertScreen(
-        revenue = revenue,
-        dessertsSold = dessertsSold,
-        dessertImageId = currentDessertImageId,
-        onDessertClicked = {
-          revenue += currentDessertPrice
-          dessertsSold++
-          val dessertToShow: Dessert = determineDessertToShow(desserts, dessertsSold)
-          currentDessertImageId = dessertToShow.imageId
-          currentDessertPrice = dessertToShow.price
-        }
+        revenue = dessertUiState.revenue,
+        dessertsSold = dessertUiState.dessertsSold,
+        dessertImageId = dessertUiState.currentDessertImageId,
+        onDessertClicked = { dessertViewModel.onDessertClicked() }
       )
     }
   }
@@ -267,8 +238,7 @@ fun DessertImage(
   Image(
     painter = painterResource(imageId),
     contentDescription = null,
-    modifier = modifier
-      .clickable { onImageClick() },
+    modifier = modifier.clickable { onImageClick() },
   )
 }
 
@@ -316,6 +286,6 @@ fun DessertTotalRevenue(
 @Composable
 fun DessertClickerAppPreview() {
   DessertClickerAppTheme(darkTheme = false) {
-    DessertClickerApp(desserts = DessertRepository.desserts)
+    DessertClickerApp()
   }
 }
