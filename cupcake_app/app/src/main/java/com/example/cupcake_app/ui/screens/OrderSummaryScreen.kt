@@ -61,7 +61,7 @@ fun OrderSummaryScreen(
           text = it.second,
           fontWeight = FontWeight.Bold
         )
-        HorizontalDivider(thickness = 1.dp,)
+        HorizontalDivider(thickness = 1.dp)
         Spacer(modifier = Modifier.height(16.dp))
       }
       Spacer(modifier = Modifier.height(8.dp))
