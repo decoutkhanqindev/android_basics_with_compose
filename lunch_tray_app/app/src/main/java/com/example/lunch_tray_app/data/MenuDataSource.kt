@@ -5,7 +5,7 @@ import com.example.lunch_tray_app.model.MenuItem.Entree
 import com.example.lunch_tray_app.model.MenuItem.SideDish
 
 object MenuDataSource {
-  val entreesMenu = listOf(
+  val entreeMenuItems = listOf(
     Entree(
       name = "Cauliflower",
       description = "Whole cauliflower, brined, roasted, and deep fried",
@@ -30,7 +30,7 @@ object MenuDataSource {
     )
   )
 
-  val sideDishesMenu = listOf(
+  val sideDishMenuItems = listOf(
     SideDish(
       name = "Summer Salad",
       description = "Heirloom tomatoes, butter lettuce, peaches, avocado, balsamic dressing",
@@ -53,7 +53,7 @@ object MenuDataSource {
     )
   )
 
-  val accompanimentsMenu = listOf(
+  val accompanimentMenuItems = listOf(
     Accompaniment(
       name = "Lunch Roll",
       description = "Fresh baked roll made in house",
