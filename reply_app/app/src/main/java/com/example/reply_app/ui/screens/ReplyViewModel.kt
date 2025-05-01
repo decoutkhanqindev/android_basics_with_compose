@@ -39,7 +39,7 @@ class ReplyViewModel : ViewModel() {
   fun resetHomeScreenStates() {
     _uiState.update { currentState ->
       currentState.copy(
-        currentSelectedEmail = currentState.mailboxes[currentState.currentMailbox]?.get(0)
+        currentSelectedEmail = currentState.mailboxes[currentState.currentMailboxType]?.get(0)
           ?: EmailDataProvider.defaultEmail,
         isShowingHomepage = true
       )
@@ -49,7 +49,7 @@ class ReplyViewModel : ViewModel() {
   fun updateCurrentMailbox(mailboxType: MailboxType) {
     _uiState.update { currentState ->
       currentState.copy(
-        currentMailbox = mailboxType
+        currentMailboxType = mailboxType
       )
     }
   }
