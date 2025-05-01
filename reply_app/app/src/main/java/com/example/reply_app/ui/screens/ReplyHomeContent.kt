@@ -36,9 +36,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import com.example.reply_app.R
 import com.example.reply_app.data.AccountDataProvider
 import com.example.reply_app.model.Email
+import com.example.reply_app.ui.utils.ReplyNavigationType
 
 @Composable
 fun ReplyListOnlyContent(
+  navigationType: ReplyNavigationType,
   replyUiState: ReplyUiState,
   onEmailCardPressed: (Email) -> Unit,
   modifier: Modifier = Modifier
@@ -52,12 +54,16 @@ fun ReplyListOnlyContent(
       dimensionResource(R.dimen.email_list_item_vertical_spacing)
     )
   ) {
-    item {
-      ReplyHomeTopBar(
-        modifier = Modifier
-          .fillMaxWidth()
-          .padding(vertical = dimensionResource(R.dimen.topbar_padding_vertical))
-      )
+    if (!(navigationType == ReplyNavigationType.PERMANENT_NAVIGATION_DRAWER
+          && replyUiState.isShowingHomepage)
+    ) {
+      item {
+        ReplyHomeTopBar(
+          modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = dimensionResource(R.dimen.topbar_padding_vertical))
+        )
+      }
     }
     items(emails, key = { email -> email.id }) { email ->
       ReplyEmailListItem(
