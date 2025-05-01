@@ -59,4 +59,10 @@ dependencies {
 
   // Navigation
   implementation("androidx.navigation:navigation-compose:2.8.9")
+
+  // Window size
+  implementation("androidx.compose.material3:material3-window-size-class")
+
+  //
+  implementation("androidx.compose.material:material-icons-extended")
 }
