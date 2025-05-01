@@ -70,7 +70,7 @@ fun ReplyDetailsScreen(
         )
         ReplyEmailDetailsCard(
           email = replyUiState.currentSelectedEmail,
-          mailboxType = replyUiState.currentMailbox,
+          mailboxType = replyUiState.currentMailboxType,
           modifier = Modifier
             .navigationBarsPadding()
             .padding(horizontal = dimensionResource(R.dimen.detail_card_outer_padding_horizontal))
