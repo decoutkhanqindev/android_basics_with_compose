@@ -7,13 +7,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
@@ -44,36 +42,39 @@ import com.example.reply_app.ui.theme.ReplyAppTheme
 fun ReplyDetailsScreen(
   replyUiState: ReplyUiState,
   onBackPressed: () -> Unit,
+  isFullScreen: Boolean = false,
   modifier: Modifier = Modifier
 ) {
-  BackHandler { 
+  BackHandler {
     onBackPressed()
   }
 
   Box(modifier = modifier) {
     LazyColumn(
-      contentPadding = WindowInsets.safeDrawing.asPaddingValues(),
-      modifier = Modifier
+      modifier = modifier
         .fillMaxSize()
         .background(color = MaterialTheme.colorScheme.inverseOnSurface)
+        .padding(top = dimensionResource(R.dimen.detail_card_list_padding_top))
     ) {
       item {
-        ReplyDetailsScreenTopBar(
-          replyUiState = replyUiState,
-          onBackButtonClicked = onBackPressed,
-          modifier = Modifier
-            .fillMaxWidth()
-            .padding(
-              bottom = dimensionResource(R.dimen.detail_topbar_padding_bottom),
-              top = dimensionResource(R.dimen.topbar_padding_vertical)
-            )
-        )
+        if (isFullScreen) {
+          ReplyDetailsScreenTopBar(
+            replyUiState = replyUiState,
+            onBackButtonClicked = onBackPressed,
+            modifier = Modifier
+              .fillMaxWidth()
+              .padding(bottom = dimensionResource(R.dimen.detail_topbar_padding_bottom))
+          )
+        }
         ReplyEmailDetailsCard(
           email = replyUiState.currentSelectedEmail,
           mailboxType = replyUiState.currentMailboxType,
-          modifier = Modifier
-            .navigationBarsPadding()
-            .padding(horizontal = dimensionResource(R.dimen.detail_card_outer_padding_horizontal))
+          isFullScreen = isFullScreen,
+          modifier = if (isFullScreen) {
+            Modifier.padding(horizontal = dimensionResource(R.dimen.detail_card_outer_padding_horizontal))
+          } else {
+            Modifier.padding(end = dimensionResource(R.dimen.detail_card_outer_padding_horizontal))
+          }
         )
       }
     }
@@ -120,6 +121,7 @@ private fun ReplyDetailsScreenTopBar(
 private fun ReplyEmailDetailsCard(
   email: Email,
   mailboxType: MailboxType,
+  isFullScreen: Boolean = false,
   modifier: Modifier = Modifier,
 ) {
   val context = LocalContext.current
@@ -139,15 +141,19 @@ private fun ReplyEmailDetailsCard(
         email = email,
         modifier = Modifier.fillMaxWidth()
       )
-      Text(
-        text = stringResource(email.subject),
-        style = MaterialTheme.typography.bodyMedium,
-        color = MaterialTheme.colorScheme.outline,
-        modifier = Modifier.padding(
-          top = dimensionResource(R.dimen.detail_content_padding_top),
-          bottom = dimensionResource(R.dimen.detail_expanded_subject_body_spacing)
-        ),
-      )
+      if (isFullScreen) {
+        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.detail_content_padding_top)))
+      } else {
+        Text(
+          text = stringResource(email.subject),
+          style = MaterialTheme.typography.bodyMedium,
+          color = MaterialTheme.colorScheme.outline,
+          modifier = Modifier.padding(
+            top = dimensionResource(R.dimen.detail_content_padding_top),
+            bottom = dimensionResource(R.dimen.detail_expanded_subject_body_spacing)
+          ),
+        )
+      }
       Text(
         text = stringResource(email.body),
         style = MaterialTheme.typography.bodyLarge,
@@ -234,8 +240,7 @@ private fun DetailsScreenButtonBar(
           modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = dimensionResource(R.dimen.detail_button_bar_padding_vertical)),
-          horizontalArrangement =
-            Arrangement.spacedBy(dimensionResource(R.dimen.detail_button_bar_item_spacing)),
+          horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.detail_button_bar_item_spacing)),
         ) {
           ActionButton(
             text = stringResource(id = R.string.reply),
