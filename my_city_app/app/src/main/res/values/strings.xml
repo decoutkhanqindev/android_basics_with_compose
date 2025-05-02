@@ -1,3 +1,81 @@
 <resources>
-  <string name="app_name">my_city_app</string>
+  <string name="app_name">My City</string>
+  <string name="COFFEE_SHOPS">Coffee Shops</string>
+  <string name="RESTAURANTS">Restaurants</string>
+  <string name="KID_FRIENDLY_PLACES">Kid-Friendly Places</string>
+  <string name="PARKS">Parks</string>
+  <string name="SHOPPING_CENTERS">Shopping Centers</string>
+
+  <string name="categories_text">Categories</string>
+
+  <!-- Coffee Shops -->
+  <string name="coffe_shop_title_1">Café El Frailejon</string>
+  <string name="coffe_shop_detail_1">
+        A cozy place with a wide variety of coffee and desserts. Perfect for relaxing and enjoying a good book.
+    </string>
+  <string name="coffe_shop_title_2">Torrefactora Café Sublime CA</string>
+  <string name="coffe_shop_detail_2">
+        Enjoy a peaceful atmosphere and an excellent selection of drinks and snacks in the heart of Barinas.
+    </string>
+  <string name="coffe_shop_title_3">Mundo Novo Café C.A</string>
+  <string name="coffe_shop_detail_3">
+        An ideal place to share with friends and enjoy a good coffee.
+    </string>
+
+  <!-- Restaurants -->
+  <string name="restaurant_title_1">Saga Cachapas</string>
+  <string name="restaurant_detail_1">
+        Known for its delicious cachapas and family-friendly atmosphere.
+    </string>
+  <string name="restaurant_title_2">Miami</string>
+  <string name="restaurant_detail_2">
+        A popular restaurant with a variety of typical Venezuelan dishes.
+    </string>
+  <string name="restaurant_title_3">Restaurant Manta la casa Ecuatoriana</string>
+  <string name="restaurant_detail_3">
+        Offers typical Ecuadorian dishes in a pleasant environment.
+    </string>
+
+  <!-- Kid-Friendly Places -->
+  <string name="kid_friendly_place_title_1">Parque Moromoy</string>
+  <string name="kid_friendly_place_detail_1">
+        A park full of playgrounds and activities for kids to have fun and play safely.
+    </string>
+  <string name="kid_friendly_place_title_2">Fundación Jardín Botánico Unellez</string>
+  <string name="kid_friendly_place_detail_2">
+        An ideal place for a family walk and to observe the local flora.
+    </string>
+  <string name="kid_friendly_place_title_3">Parque de los Niños</string>
+  <string name="kid_friendly_place_detail_3">
+        A space specifically designed for the entertainment of young children.
+    </string>
+
+  <!-- Parks -->
+  <string name="park_title_1">Parque Santos Luzardo</string>
+  <string name="park_detail_1">
+        A beautiful natural park where you can enjoy walks, picnics, and observe the local flora and fauna.
+    </string>
+  <string name="park_title_2">Parque Zoológico de Barinas</string>
+  <string name="park_detail_2">
+        A space dedicated to the conservation and exhibition of various animal species.
+    </string>
+  <string name="park_title_3">Parque Moromoy</string>
+  <string name="park_detail_3">
+        A park full of greenery and areas for outdoor activities.
+    </string>
+
+  <!-- Shopping Centers -->
+  <string name="shopping_center_title_1">Centro Comercial Barinas Plaza</string>
+  <string name="shopping_center_detail_1">
+        A shopping center with a variety of stores and entertainment options for the whole family.
+    </string>
+  <string name="shopping_center_title_2">Centro Comercial Los Llanos</string>
+  <string name="shopping_center_detail_2">
+        Offers an excellent selection of stores, restaurants, and recreational areas.
+    </string>
+  <string name="shopping_center_title_3">Centro Comercial Barinas Express</string>
+  <string name="shopping_center_detail_3">
+        An ideal place to shop and enjoy a good meal.
+    </string>
+
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="micro_padding">4dp</dimen>
+  <dimen name="small_padding">8dp</dimen>
+  <dimen name="medium_padding">16dp</dimen>
+  <dimen name="large_padding">24dp</dimen>
+
+  <dimen name="medium_image_dimension">55dp</dimen>
+  <dimen name="large_image_dimension">250dp</dimen>
+
+  <dimen name="micro_rounded_corner">4dp</dimen>
+</resources>
