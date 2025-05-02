@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.reply_app.ui.theme.ReplyAppTheme
+import com.example.reply_app.ui.utils.ReplyContentType
 import com.example.reply_app.ui.utils.ReplyNavigationType
 
 @Composable
@@ -14,29 +15,36 @@ fun ReplyApp(
   windowSize: WindowWidthSizeClass,
   modifier: Modifier = Modifier
 ) {
+  val navigationType: ReplyNavigationType
+  val contentType: ReplyContentType
+
   val replyViewModel: ReplyViewModel = viewModel()
   val replyUiState = replyViewModel.uiState.collectAsState().value
 
-  val navigationType = when (windowSize) {
+  when (windowSize) {
     WindowWidthSizeClass.Compact -> {
-      ReplyNavigationType.BOTTOM_NAVIGATION
+      navigationType = ReplyNavigationType.BOTTOM_NAVIGATION
+      contentType = ReplyContentType.LIST_ONLY
     }
 
     WindowWidthSizeClass.Medium -> {
-      ReplyNavigationType.NAVIGATION_RAIL
+      navigationType = ReplyNavigationType.NAVIGATION_RAIL
+      contentType = ReplyContentType.LIST_ONLY
     }
 
     WindowWidthSizeClass.Expanded -> {
-      ReplyNavigationType.PERMANENT_NAVIGATION_DRAWER
+      navigationType = ReplyNavigationType.PERMANENT_NAVIGATION_DRAWER
+      contentType = ReplyContentType.LIST_AND_DETAILS
     }
 
     else -> {
-      ReplyNavigationType.BOTTOM_NAVIGATION
+      navigationType = ReplyNavigationType.BOTTOM_NAVIGATION
+      contentType = ReplyContentType.LIST_ONLY
     }
   }
-
   ReplyHomeScreen(
     navigationType = navigationType,
+    contentType = contentType,
     replyUiState = replyUiState,
     onTabPressed = {
       replyViewModel.updateCurrentMailbox(mailboxType = it)
