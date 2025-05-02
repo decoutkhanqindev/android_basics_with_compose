@@ -36,11 +36,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import com.example.reply_app.R
 import com.example.reply_app.data.AccountDataProvider
 import com.example.reply_app.model.Email
-import com.example.reply_app.ui.utils.ReplyNavigationType
 
 @Composable
 fun ReplyListOnlyContent(
-  navigationType: ReplyNavigationType,
   replyUiState: ReplyUiState,
   onEmailCardPressed: (Email) -> Unit,
   modifier: Modifier = Modifier
@@ -54,16 +52,12 @@ fun ReplyListOnlyContent(
       dimensionResource(R.dimen.email_list_item_vertical_spacing)
     )
   ) {
-    if (!(navigationType == ReplyNavigationType.PERMANENT_NAVIGATION_DRAWER
-          && replyUiState.isShowingHomepage)
-    ) {
-      item {
-        ReplyHomeTopBar(
-          modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = dimensionResource(R.dimen.topbar_padding_vertical))
-        )
-      }
+    item {
+      ReplyHomeTopBar(
+        modifier = Modifier
+          .fillMaxWidth()
+          .padding(vertical = dimensionResource(R.dimen.topbar_padding_vertical))
+      )
     }
     items(emails, key = { email -> email.id }) { email ->
       ReplyEmailListItem(
@@ -95,27 +89,21 @@ fun ReplyListAndDetailsContent(
       modifier = Modifier
         .weight(1f)
         .padding(horizontal = dimensionResource(R.dimen.email_list_only_horizontal_padding)),
-      verticalArrangement = Arrangement.spacedBy(
-        dimensionResource(R.dimen.email_list_item_vertical_spacing)
-      )
+      verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.email_list_item_vertical_spacing))
     ) {
       items(emails, key = { email -> email.id }) { email ->
         ReplyEmailListItem(
           email = email,
           selected = replyUiState.currentSelectedEmail.id == email.id,
-          onCardClick = {
-            onEmailCardPressed(email)
-          },
+          onCardClick = { onEmailCardPressed(email) },
         )
       }
     }
     val activity = LocalContext.current as Activity
     ReplyDetailsScreen(
       replyUiState = replyUiState,
-      modifier = Modifier
-        .padding(top = dimensionResource(R.dimen.email_list_item_vertical_spacing))
-        .weight(1f),
-      onBackPressed = {}
+      modifier = Modifier.weight(1f),
+      onBackPressed = { activity.finish() }
     )
   }
 }
