@@ -29,6 +29,7 @@
   <dimen name="detail_card_outer_padding_horizontal">24dp</dimen>
   <dimen name="detail_subject_padding_end">40dp</dimen>
   <dimen name="detail_card_inner_padding">20dp</dimen>
+  <dimen name="detail_card_list_padding_top">20dp</dimen>
   <dimen name="detail_content_padding_top">12dp</dimen>
   <dimen name="detail_expanded_subject_body_spacing">8dp</dimen>
   <dimen name="detail_button_bar_padding_vertical">20dp</dimen>
