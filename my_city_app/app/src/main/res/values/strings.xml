@@ -1,10 +1,10 @@
 <resources>
   <string name="app_name">My City</string>
-  <string name="COFFEE_SHOPS">Coffee Shops</string>
-  <string name="RESTAURANTS">Restaurants</string>
-  <string name="KID_FRIENDLY_PLACES">Kid-Friendly Places</string>
-  <string name="PARKS">Parks</string>
-  <string name="SHOPPING_CENTERS">Shopping Centers</string>
+  <string name="coffee_shops">Coffee Shops</string>
+  <string name="restaurants">Restaurants</string>
+  <string name="kid_places">Kid-Friendly Places</string>
+  <string name="parks">Parks</string>
+  <string name="shopping_centers">Shopping Centers</string>
 
   <string name="categories_text">Categories</string>
 
