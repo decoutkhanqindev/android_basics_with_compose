@@ -1,4 +1,4 @@
-package com.example.my_city_app.domain.repository
+package com.example.my_city_app.data.repository
 
 import com.example.my_city_app.domain.model.CategoryType
 import com.example.my_city_app.domain.model.Recommendation
