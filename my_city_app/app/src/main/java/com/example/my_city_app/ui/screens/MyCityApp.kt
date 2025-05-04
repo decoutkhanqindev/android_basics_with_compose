@@ -1,11 +1,14 @@
 package com.example.my_city_app.ui.screens
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.my_city_app.R
 import com.example.my_city_app.data.local.CategoryDataSource
 import com.example.my_city_app.data.local.RecommendationDataSource
 import com.example.my_city_app.data.repository.CategoryRepositoryImpl
@@ -47,7 +50,7 @@ fun MyCityApp(
     onDetailsScreenBackClick = {
       viewModel.resetHomeScreenStates()
     },
-    modifier = modifier
+    modifier = modifier.padding(dimensionResource(R.dimen.medium_padding))
   )
 }
 
