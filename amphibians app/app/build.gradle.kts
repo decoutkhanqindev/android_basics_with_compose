@@ -2,6 +2,8 @@ plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.compose)
+  // KSP
+  id("com.google.devtools.ksp") version "2.1.20-1.0.31"
 }
 
 android {
@@ -53,4 +55,19 @@ dependencies {
   androidTestImplementation(libs.androidx.ui.test.junit4)
   debugImplementation(libs.androidx.ui.tooling)
   debugImplementation(libs.androidx.ui.test.manifest)
+
+  // ViewModel
+  implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+
+  // Retrofit
+  implementation("com.squareup.retrofit2:retrofit:2.11.0")
+  implementation("com.squareup.retrofit2:converter-moshi:2.11.0")
+
+  // Moshi
+  implementation("com.squareup.moshi:moshi-kotlin:1.15.2")
+  ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.2")
+
+  // Coil
+  implementation("io.coil-kt.coil3:coil-compose:3.1.0")
+  implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
 }
