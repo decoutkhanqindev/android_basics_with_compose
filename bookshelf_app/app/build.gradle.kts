@@ -2,6 +2,7 @@ plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.compose)
+  kotlin("plugin.serialization") version "2.1.20"
 }
 
 android {
@@ -53,4 +54,24 @@ dependencies {
   androidTestImplementation(libs.androidx.ui.test.junit4)
   debugImplementation(libs.androidx.ui.tooling)
   debugImplementation(libs.androidx.ui.test.manifest)
+
+  // ViewModel
+  implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+
+  // Navigation
+  implementation("androidx.navigation:navigation-compose:2.8.9")
+
+  // Serialization
+  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
+
+  // Retrofit
+  implementation("com.squareup.retrofit2:retrofit:2.11.0")
+  implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+
+  // Gson
+  implementation("com.google.code.gson:gson:2.13.1")
+
+  // Coil
+  implementation("io.coil-kt.coil3:coil-compose:3.1.0")
+  implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
 }
