@@ -20,14 +20,11 @@ class DetailsViewModel(
   private val _uiState = MutableStateFlow<DetailsUiState>(DetailsUiState.Loading)
   val uiState: StateFlow<DetailsUiState> = _uiState.asStateFlow()
 
-  private val _id = MutableStateFlow("")
-  private val id: StateFlow<String> = _id.asStateFlow()
-
-  fun getBookDetails() {
+  fun getBookDetails(id: String) {
     viewModelScope.launch {
       _uiState.value = DetailsUiState.Loading
       try {
-        val book = bookshelfRepository.getBookDetails(id.value)
+        val book = bookshelfRepository.getBookDetails(id)
         _uiState.value = DetailsUiState.Success(book)
       } catch (e: CancellationException) {
         throw e
@@ -38,12 +35,8 @@ class DetailsViewModel(
     }
   }
 
-  fun retry() {
-    getBookDetails()
-  }
-
-  fun setId(id: String) {
-    _id.value = id
+  fun retry(id: String) {
+    getBookDetails(id)
   }
 
   companion object {
