@@ -124,7 +124,7 @@ private fun BookDetails(
         modifier = Modifier.padding(bottom = 8.dp)
       )
       Text(
-        text = book.volumeInfo?.description ?: "",
+        text = book.volumeInfo.description,
         style = MaterialTheme.typography.bodyMedium,
         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
       )
