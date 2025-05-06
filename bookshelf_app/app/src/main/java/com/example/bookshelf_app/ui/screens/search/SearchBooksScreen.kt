@@ -21,7 +21,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
@@ -29,10 +28,6 @@ import coil3.request.crossfade
 import com.example.bookshelf_app.R
 import com.example.bookshelf_app.model.Book
 import com.example.bookshelf_app.model.Books
-import com.example.bookshelf_app.model.ImageLinks
-import com.example.bookshelf_app.model.Price
-import com.example.bookshelf_app.model.SaleInfo
-import com.example.bookshelf_app.model.VolumeInfo
 import com.example.bookshelf_app.ui.components.ErrorScreen
 import com.example.bookshelf_app.ui.components.LoadingScreen
 import com.example.bookshelf_app.ui.components.SearchAppBar
@@ -40,38 +35,23 @@ import com.example.bookshelf_app.ui.components.SearchAppBar
 @Composable
 fun SearchBooksScreen(
   searchUiState: SearchUiState,
+  searchResults: Books?,
   searchQuery: String,
   isSearching: Boolean,
   onSearchQueryChanged: (String) -> Unit,
-  onSearchButtonClick: () -> Unit,
   onRetry: () -> Unit,
   onBookClick: (Book) -> Unit,
   modifier: Modifier = Modifier
 ) {
-  Column(modifier = modifier) {
+  Column(modifier = modifier.fillMaxSize()) {
     SearchAppBar(
       searchQuery = searchQuery,
       onSearchQueryChanged = onSearchQueryChanged,
-      onSearchButtonClick = onSearchButtonClick,
       modifier = Modifier
         .fillMaxWidth()
         .padding(8.dp)
     )
-    if (isSearching) {
-      when (searchUiState) {
-        is SearchUiState.Loading -> LoadingScreen(modifier = Modifier.fillMaxSize())
-        is SearchUiState.Success -> BooksGridList(
-          results = searchUiState.results,
-          onBookClick = onBookClick,
-          modifier = Modifier.fillMaxSize()
-        )
-
-        is SearchUiState.Error -> ErrorScreen(
-          onRetry = onRetry,
-          modifier = Modifier.fillMaxSize()
-        )
-      }
-    } else {
+    if (searchQuery.isEmpty()) {
       Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -81,6 +61,42 @@ fun SearchBooksScreen(
           text = "Welcome to Bookshelf App!",
           style = MaterialTheme.typography.titleLarge
         )
+      }
+    } else {
+      when (searchUiState) {
+        SearchUiState.Loading -> {
+          LoadingScreen(modifier = Modifier.fillMaxSize())
+        }
+
+        SearchUiState.Success -> {
+          if (isSearching) {
+            LoadingScreen(modifier = Modifier.fillMaxSize())
+          } else if (searchResults != null && searchResults.items?.isNotEmpty() == true) {
+            BooksGridList(
+              results = searchResults,
+              onBookClick = onBookClick,
+              modifier = Modifier.fillMaxSize()
+            )
+          } else {
+            Column(
+              modifier = Modifier.fillMaxSize(),
+              horizontalAlignment = Alignment.CenterHorizontally,
+              verticalArrangement = Arrangement.Center
+            ) {
+              Text(
+                text = "Oops, no results found!",
+                style = MaterialTheme.typography.titleLarge
+              )
+            }
+          }
+        }
+
+        SearchUiState.Error -> {
+          ErrorScreen(
+            onRetry = onRetry,
+            modifier = Modifier.fillMaxSize()
+          )
+        }
       }
     }
   }
@@ -127,7 +143,9 @@ private fun BookCardItem(
       error = painterResource(id = R.drawable.ic_broken_image),
       placeholder = painterResource(id = R.drawable.loading_img),
       contentScale = ContentScale.FillBounds,
-      modifier = Modifier.aspectRatio(.6f)
+      modifier = Modifier
+        .fillMaxWidth()
+        .aspectRatio(1f)
     )
     Text(
       text = book.volumeInfo?.title ?: "Untitled",
@@ -151,151 +169,4 @@ private fun BookCardItem(
       modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
     )
   }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun SearchBooksScreenPreview() {
-  SearchBooksScreen(
-    searchUiState = SearchUiState.Success(
-      Books(
-        totalItems = 1,
-        items = listOf(
-          Book(
-            id = "zyTCAlFPjgYC",
-            saleInfo = SaleInfo(
-              country = "US",
-              saleability = "FOR_SALE",
-              isEbook = true,
-              listPrice = Price(amount = 11.99, currencyCode = "USD"),
-              retailPrice = Price(amount = 11.99, currencyCode = "USD"),
-              buyLink = "https://books.google.com/books?id=zyTCAlFPjgYC&ie=ISO-8859-1&buy=&source=gbs_api"
-            ),
-            volumeInfo = VolumeInfo(
-              title = "The Google story",
-              authors = listOf("David A. Vise", "Mark Malseed"),
-              publisher = "Random House Digital, Inc.",
-              publishedDate = "2005-11-15",
-              description = "\"Here is the story behind one of the most remarkable Internet successes of our time. Based on scrupulous research and extraordinary access to Google, ...\"",
-              pageCount = 207,
-              categories = listOf("Browsers (Computer programs)"),
-              imageLinks = ImageLinks(
-                smallThumbnail = "https://books.google.com/books?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-                thumbnail = "https://books.google.com/books?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-              ),
-              language = "en"
-            )
-          ),
-          Book(
-            id = "zyTCAlFPjgYC",
-            saleInfo = SaleInfo(
-              country = "US",
-              saleability = "FOR_SALE",
-              isEbook = true,
-              listPrice = Price(amount = 11.99, currencyCode = "USD"),
-              retailPrice = Price(amount = 11.99, currencyCode = "USD"),
-              buyLink = "https://books.google.com/books?id=zyTCAlFPjgYC&ie=ISO-8859-1&buy=&source=gbs_api"
-            ),
-            volumeInfo = VolumeInfo(
-              title = "The Google story",
-              authors = listOf("David A. Vise", "Mark Malseed"),
-              publisher = "Random House Digital, Inc.",
-              publishedDate = "2005-11-15",
-              description = "\"Here is the story behind one of the most remarkable Internet successes of our time. Based on scrupulous research and extraordinary access to Google, ...\"",
-              pageCount = 207,
-              categories = listOf("Browsers (Computer programs)"),
-              imageLinks = ImageLinks(
-                smallThumbnail = "https://books.google.com/books?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-                thumbnail = "https://books.google.com/books?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-              ),
-              language = "en"
-            )
-          ),
-          Book(
-            id = "zyTCAlFPjgYC",
-            saleInfo = SaleInfo(
-              country = "US",
-              saleability = "FOR_SALE",
-              isEbook = true,
-              listPrice = Price(amount = 11.99, currencyCode = "USD"),
-              retailPrice = Price(amount = 11.99, currencyCode = "USD"),
-              buyLink = "https://books.google.com/books?id=zyTCAlFPjgYC&ie=ISO-8859-1&buy=&source=gbs_api"
-            ),
-            volumeInfo = VolumeInfo(
-              title = "The Google story",
-              authors = listOf("David A. Vise", "Mark Malseed"),
-              publisher = "Random House Digital, Inc.",
-              publishedDate = "2005-11-15",
-              description = "\"Here is the story behind one of the most remarkable Internet successes of our time. Based on scrupulous research and extraordinary access to Google, ...\"",
-              pageCount = 207,
-              categories = listOf("Browsers (Computer programs)"),
-              imageLinks = ImageLinks(
-                smallThumbnail = "https://books.google.com/books?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-                thumbnail = "https://books.google.com/books?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-              ),
-              language = "en"
-            )
-          ),
-          Book(
-            id = "zyTCAlFPjgYC",
-            saleInfo = SaleInfo(
-              country = "US",
-              saleability = "FOR_SALE",
-              isEbook = true,
-              listPrice = Price(amount = 11.99, currencyCode = "USD"),
-              retailPrice = Price(amount = 11.99, currencyCode = "USD"),
-              buyLink = "https://books.google.com/books?id=zyTCAlFPjgYC&ie=ISO-8859-1&buy=&source=gbs_api"
-            ),
-            volumeInfo = VolumeInfo(
-              title = "The Google story",
-              authors = listOf("David A. Vise", "Mark Malseed"),
-              publisher = "Random House Digital, Inc.",
-              publishedDate = "2005-11-15",
-              description = "\"Here is the story behind one of the most remarkable Internet successes of our time. Based on scrupulous research and extraordinary access to Google, ...\"",
-              pageCount = 207,
-              categories = listOf("Browsers (Computer programs)"),
-              imageLinks = ImageLinks(
-                smallThumbnail = "https://books.google.com/books?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-                thumbnail = "https://books.google.com/books?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-              ),
-              language = "en"
-            )
-          ),
-          Book(
-            id = "zyTCAlFPjgYC",
-            saleInfo = SaleInfo(
-              country = "US",
-              saleability = "FOR_SALE",
-              isEbook = true,
-              listPrice = Price(amount = 11.99, currencyCode = "USD"),
-              retailPrice = Price(amount = 11.99, currencyCode = "USD"),
-              buyLink = "https://books.google.com/books?id=zyTCAlFPjgYC&ie=ISO-8859-1&buy=&source=gbs_api"
-            ),
-            volumeInfo = VolumeInfo(
-              title = "The Google story",
-              authors = listOf("David A. Vise", "Mark Malseed"),
-              publisher = "Random House Digital, Inc.",
-              publishedDate = "2005-11-15",
-              description = "\"Here is the story behind one of the most remarkable Internet successes of our time. Based on scrupulous research and extraordinary access to Google, ...\"",
-              pageCount = 207,
-              categories = listOf("Browsers (Computer programs)"),
-              imageLinks = ImageLinks(
-                smallThumbnail = "https://books.google.com/books?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-                thumbnail = "https://books.google.com/books?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-              ),
-              language = "en"
-            )
-          )
-        )
-      )
-    ),
-    searchQuery = "",
-    isSearching = false,
-    onSearchQueryChanged = {},
-    onSearchButtonClick = {},
-    onRetry = {},
-    onBookClick = {},
-    modifier = Modifier.fillMaxSize()
-  )
 }
