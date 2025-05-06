@@ -6,6 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -17,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.example.bookshelf_app.R
 import com.example.bookshelf_app.ui.components.TopAppBar
 import com.example.bookshelf_app.ui.navigation.NavigationDestinations
@@ -31,20 +33,25 @@ fun BookshelfApp() {
   val searchViewModel: SearchViewModel = viewModel(factory = SearchViewModel.Factory)
   val searchQuery by searchViewModel.query.collectAsStateWithLifecycle()
   val isSearching by searchViewModel.isSearching.collectAsStateWithLifecycle()
-  val searchUiState = searchViewModel.uiState.collectAsStateWithLifecycle().value
+  val searchUiState by searchViewModel.uiState.collectAsStateWithLifecycle()
+  val searchResults by searchViewModel.searchResults.collectAsStateWithLifecycle()
 
   val detailsViewModel: DetailsViewModel = viewModel(factory = DetailsViewModel.Factory)
-  val detailsUiState = detailsViewModel.uiState.collectAsStateWithLifecycle().value
+  val detailsUiState by detailsViewModel.uiState.collectAsStateWithLifecycle()
 
   val navController = rememberNavController()
   val backStackEntry by navController.currentBackStackEntryAsState()
-  val currentScreen = NavigationDestinations.valueOf(
-    backStackEntry?.destination?.route?.uppercase() ?: NavigationDestinations.SEARCH.name
-  )
+  val currentScreen = backStackEntry?.destination?.route
+    ?: NavigationDestinations.SearchBooksDestination::class.qualifiedName
 
   val currentScreenTitle = when (currentScreen) {
-    NavigationDestinations.SEARCH -> stringResource(R.string.app_name)
-    else -> "Book Details"
+    NavigationDestinations.SearchBooksDestination::class.qualifiedName ->
+      stringResource(R.string.app_name)
+
+    NavigationDestinations.BooksDetailsDestination::class.qualifiedName ->
+      "Book Details"
+
+    else -> stringResource(R.string.app_name)
   }
 
   Scaffold(
@@ -56,37 +63,41 @@ fun BookshelfApp() {
         navigateUp = { navController.navigateUp() },
       )
     },
-  ) {
+  ) { paddingValues ->
     Surface(
       modifier = Modifier
         .fillMaxSize()
-        .padding(it),
+        .padding(paddingValues),
       color = MaterialTheme.colorScheme.background
     ) {
       NavHost(
         navController = navController,
-        startDestination = NavigationDestinations.SEARCH.name,
+        startDestination = NavigationDestinations.SearchBooksDestination
       ) {
-        composable(route = NavigationDestinations.SEARCH.name) {
+        composable<NavigationDestinations.SearchBooksDestination> {
           SearchBooksScreen(
             searchUiState = searchUiState,
+            searchResults = searchResults,
             searchQuery = searchQuery,
             isSearching = isSearching,
             onSearchQueryChanged = { searchViewModel.onQueryChanged(it) },
-            onSearchButtonClick = { searchViewModel.searchBooks() },
             onRetry = { searchViewModel.retry() },
-            onBookClick = {
-              navController.navigate(route = NavigationDestinations.DETAILS.name)
-              detailsViewModel.setId(it.id)
-              detailsViewModel.getBookDetails()
+            onBookClick = { book ->
+              navController.navigate(NavigationDestinations.BooksDetailsDestination(id = book.id))
             },
             modifier = Modifier.fillMaxSize()
           )
         }
-        composable(route = NavigationDestinations.DETAILS.name) {
+        composable<NavigationDestinations.BooksDetailsDestination> { backStackEntry ->
+          val args = backStackEntry.toRoute<NavigationDestinations.BooksDetailsDestination>()
+          LaunchedEffect(args.id) {
+            if (args.id != null) {
+              detailsViewModel.getBookDetails(args.id)
+            }
+          }
           BookDetailsScreen(
             detailsUiState = detailsUiState,
-            onRetry = { detailsViewModel.retry() },
+            onRetry = { detailsViewModel.retry(args.id ?: "") },
             modifier = Modifier
               .fillMaxSize()
               .padding(start = 8.dp, end = 8.dp, top = 8.dp)
