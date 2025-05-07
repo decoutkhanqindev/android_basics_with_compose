@@ -2,6 +2,8 @@ plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.compose)
+  kotlin("plugin.serialization") version "2.0.21"
+  id("com.google.devtools.ksp")
 }
 
 android {
@@ -53,4 +55,17 @@ dependencies {
   androidTestImplementation(libs.androidx.ui.test.junit4)
   debugImplementation(libs.androidx.ui.tooling)
   debugImplementation(libs.androidx.ui.test.manifest)
+
+  // ViewModel
+  implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+
+  // Navigation
+  implementation("androidx.navigation:navigation-compose:2.8.9")
+  // JSON serialization library, works with the Kotlin serialization plugin
+  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+
+  // Room
+  implementation("androidx.room:room-runtime:2.7.1")
+  ksp("androidx.room:room-compiler:2.7.1")
+  implementation("androidx.room:room-ktx:2.7.1")
 }
