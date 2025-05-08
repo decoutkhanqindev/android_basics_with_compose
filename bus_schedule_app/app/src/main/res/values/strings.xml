@@ -1,3 +1,8 @@
 <resources>
-  <string name="app_name">schedule_app</string>
+  <string name="app_name">Bus Schedule</string>
+  <string name="add_schedule">Add Schedule</string>
+  <string name="schedule_details">Schedule Details</string>
+  <string name="stop_name">Stop Name</string>
+  <string name="arrival_time">Arrival Time</string>
+  <string name="no_schedules_description">Oops!\nNo schedules here.\nTap + to add.</string>
 </resources>
