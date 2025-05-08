@@ -5,4 +5,13 @@
   <string name="stop_name">Stop Name</string>
   <string name="arrival_time">Arrival Time</string>
   <string name="no_schedules_description">Oops!\nNo schedules here.\nTap + to add.</string>
+  <string name="dismiss">Dismiss</string>
+  <string name="confirm">Confirm</string>
+  <string name="save">Save</string>
+  <string name="pick_time">Pick Time</string>
+  <string name="action">Action</string>
+  <string name="no">No</string>
+  <string name="yes">Yes</string>
+  <string name="delete_question">Are you sure you want to delete?</string>
+  <string name="attention">Attention</string>
 </resources>
