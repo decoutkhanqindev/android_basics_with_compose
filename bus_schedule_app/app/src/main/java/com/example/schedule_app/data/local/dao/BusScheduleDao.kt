@@ -21,26 +21,15 @@ interface BusScheduleDao {
 
   @Query(
     """
-        SELECT * FROM schedules
-        WHERE stop_name = :stopName
+       SELECT * FROM schedules
+        WHERE stop_name LIKE '%' || :stopName || '%'
         ORDER BY arrival_time ASC 
     """
   )
   fun getSchedulesByStopName(stopName: String): Flow<List<BusSchedule>>
 
-  @Query(
-    """
-        SELECT DISTINCT stop_name FROM schedules
-        ORDER BY stop_name ASC
-    """
-  )
-  fun getDistinctStopNames(): Flow<List<String>>
-
   @Insert(onConflict = OnConflictStrategy.IGNORE)
   suspend fun insertSchedule(schedule: BusSchedule)
-
-  @Insert(onConflict = OnConflictStrategy.IGNORE)
-  suspend fun insertSchedules(schedules: List<BusSchedule>)
 
   @Update
   suspend fun updateSchedule(schedule: BusSchedule)
