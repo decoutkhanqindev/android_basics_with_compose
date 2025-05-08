@@ -12,13 +12,8 @@ class BusScheduleRepositoryImpl(
   override fun getScheduleByStopName(stopName: String): Flow<List<BusSchedule>> =
     busScheduleDao.getSchedulesByStopName(stopName)
 
-  override fun getDistinctStopName(): Flow<List<String>> = busScheduleDao.getDistinctStopNames()
-
   override suspend fun insertSchedule(schedule: BusSchedule) =
     busScheduleDao.insertSchedule(schedule)
-
-  override suspend fun insertSchedules(schedules: List<BusSchedule>) =
-    busScheduleDao.insertSchedules(schedules)
 
   override suspend fun updateSchedule(schedule: BusSchedule) =
     busScheduleDao.updateSchedule(schedule)
