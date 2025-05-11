@@ -53,4 +53,9 @@ dependencies {
   androidTestImplementation(libs.androidx.ui.test.junit4)
   debugImplementation(libs.androidx.ui.tooling)
   debugImplementation(libs.androidx.ui.test.manifest)
+
+  // ViewModel
+  implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.0")
+  // Preferences DataStore
+  implementation("androidx.datastore:datastore-preferences:1.1.6")
 }
