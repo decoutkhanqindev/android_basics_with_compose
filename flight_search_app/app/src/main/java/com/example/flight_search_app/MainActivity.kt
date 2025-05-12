@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.example.flight_search_app.ui.FlightSearchApp
 import com.example.flight_search_app.ui.theme.FlightSearchAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -12,6 +13,7 @@ class MainActivity : ComponentActivity() {
     enableEdgeToEdge()
     setContent {
       FlightSearchAppTheme {
+        FlightSearchApp()
       }
     }
   }
