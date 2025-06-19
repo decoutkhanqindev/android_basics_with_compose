@@ -46,25 +46,6 @@ This repository includes multiple small projects, each serving as a practical ex
 | tip_calculator_app  | Compose UI, State                   | Tip calculator app, practice input and state with Compose.                              | [tip_calculator_app](./tip_calculator_app)   |
 | reply_app           | Compose UI, Navigation              | Sample email client app, practice navigation and Compose.                               | [reply_app](./reply_app)                     |
 
-> **Note:** Each folder is an independent Android Studio project. You can open and practice with each project separately.
-
-## 🚀 How to Set Up & Run
-
-1. **Requirements:**
-
-   - [Android Studio](https://developer.android.com/studio) installed
-   - JDK 11+.
-   - Android SDK API 24+.
-     
-2. **How to open a project:**
-
-   - In Android Studio: File > Open > select a subproject folder (e.g. `blur_o_matic`)
-   - Wait for Gradle sync to complete
-
-3. **Run the app:**
-   - Select the `app` module > click Run (Shift+F10) or ▶️ icon
-   - Choose a device/emulator to run
-
 ## 🧑‍🏫 References
 
 - [Android Basics with Compose - Google](https://developer.android.com/courses/android-basics-compose/course)
