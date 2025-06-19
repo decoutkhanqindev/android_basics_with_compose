@@ -1,8 +1,8 @@
-# Android Basics with Jetpack Compose - Sample Projects
+# 📚 Android Basics with Jetpack Compose - Sample Projects
 
 This repository contains a collection of sample projects following the [Android Basics with Compose](https://developer.android.com/courses/android-basics-compose/course) course by Google.
 
-## Introduction
+## 📃 Introduction
 
 This repository includes multiple small projects, each serving as a practical example to help you learn and practice key topics in modern Android app development with Jetpack Compose and Kotlin. Covered topics include:
 
@@ -14,7 +14,7 @@ This repository includes multiple small projects, each serving as a practical ex
 - Displaying images with Coil
 - Modern app architecture (MVVM, Repository, manual Dependency Injection)
 
-## Sample Project List
+## ✅ Sample Project List
 
 | Project Name        | Tech Stack                          | Descriptions                                                                            | Source                                       |
 | ------------------- | ----------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------- |
@@ -48,7 +48,7 @@ This repository includes multiple small projects, each serving as a practical ex
 
 > **Note:** Each folder is an independent Android Studio project. You can open and practice with each project separately.
 
-## How to Set Up & Run
+## 🚀 How to Set Up & Run
 
 1. **Requirements:**
 
@@ -65,7 +65,7 @@ This repository includes multiple small projects, each serving as a practical ex
    - Select the `app` module > click Run (Shift+F10) or ▶️ icon
    - Choose a device/emulator to run
 
-## References
+## 🧑‍🏫 References
 
 - [Android Basics with Compose - Google](https://developer.android.com/courses/android-basics-compose/course)
 - [Jetpack Compose Documentation](https://developer.android.com/jetpack/compose)
