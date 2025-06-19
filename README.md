@@ -1,10 +1,6 @@
 # 📚 Android Basics with Jetpack Compose - Sample Projects
 
-This repository contains a collection of sample projects following the [Android Basics with Compose](https://developer.android.com/courses/android-basics-compose/course) course by Google.
-
-## 📃 Introduction
-
-This repository includes multiple small projects, each serving as a practical example to help you learn and practice key topics in modern Android app development with Jetpack Compose and Kotlin. Covered topics include:
+This repository includes multiple small projects, each serving as a practical example to learn and practice key topics in modern [Android app development with Jetpack Compose](https://developer.android.com/courses/android-basics-compose/course) by Google. Covered topics include:
 
 - UI with Jetpack Compose
 - State and event handling
