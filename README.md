@@ -1,4 +1,4 @@
-# 📚 Learning Android App Development With Jetpack Compose
+# 📚 Learning Jetpack Compose UI App Development Toolkit for Android
 
 This repository includes multiple small projects, each serving as a practical example to learn and practice key topics in modern [Android app development with Jetpack Compose](https://developer.android.com/courses/android-basics-compose/course) by Google. Covered topics include:
 
