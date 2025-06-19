@@ -16,7 +16,7 @@ This repository includes multiple small projects, each serving as a practical ex
 
 ## Sample Project List
 
-| Folder name         | Main topics                         | Short description                                                                       | Link                                         |
+| Project Name        | Tech Stack                          | Descriptions                                                                            | Source                                       |
 | ------------------- | ----------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------- |
 | blur_o_matic        | WorkManager, Compose UI, Material 3 | Image blurring app using WorkManager for background processing, modern UI with Compose. | [blur_o_matic](./blur_o_matic)               |
 | flight_search_app   | DataStore, Compose UI, Navigation   | Flight search app, practice data storage with DataStore and navigation with Compose.    | [flight_search_app](./flight_search_app)     |
@@ -53,9 +53,9 @@ This repository includes multiple small projects, each serving as a practical ex
 1. **Requirements:**
 
    - [Android Studio](https://developer.android.com/studio) installed
-   - JDK 11 or higher
-   - Internet connection to download dependencies
-
+   - JDK 11+.
+   - Android SDK API 24+.
+     
 2. **How to open a project:**
 
    - In Android Studio: File > Open > select a subproject folder (e.g. `blur_o_matic`)
@@ -65,15 +65,12 @@ This repository includes multiple small projects, each serving as a practical ex
    - Select the `app` module > click Run (Shift+F10) or ▶️ icon
    - Choose a device/emulator to run
 
-## License
-
-Source code is licensed under the [Apache License 2.0](sql_basic_app/LICENSE.md).
-
 ## References
 
 - [Android Basics with Compose - Google](https://developer.android.com/courses/android-basics-compose/course)
 - [Jetpack Compose Documentation](https://developer.android.com/jetpack/compose)
+- [Anroid Jetpack Libraries](https://developer.android.com/jetpack/androidx/explorer?case=all)
 
----
+## 📝 License
 
-> This repository is for learning purposes only and is not an official Google product.
+This project is developed for educational and personal purposes.
