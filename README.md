@@ -1,4 +1,4 @@
-# 📚 Android Basics with Jetpack Compose - Sample Projects
+# 📚 Learning Jetpack Compose UI App Development Toolkit for Android
 
 This repository contains a collection of sample projects following the [Android Basics with Compose](https://developer.android.com/courses/android-basics-compose/course) course by Google.
 
